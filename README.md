@@ -83,7 +83,13 @@ Opening `https://your-site/thank-you.html` directly does nothing. The page has n
 PDF URL in it. Its download button calls `/api/download`, which requires the
 `ii_purchase` cookie — an HttpOnly, server-signed token that is only ever set by
 `/api/razorpay/callback` after a signature check. Without it the endpoint
-returns `401` and the page shows the "couldn't verify your purchase" message.
+returns `401`.
+
+The page also refuses to *claim* anything it cannot back up. The headline,
+supporting copy and product card are hidden by CSS until `/api/download`
+answers. A verified customer sees "You're in." and their download; anyone else
+sees "Nothing to download yet." with a buy button, and never reads that their
+payment succeeded. If JavaScript never runs, nothing is revealed at all.
 
 Even *with* a valid cookie the server re-reads the purchase row on every single
 request, so a refund revokes access immediately and the download limit is

@@ -41,10 +41,12 @@ the session lives in an HttpOnly cookie, not the URL.
 
 **Expect:**
 
-- [ ] The page renders normally
-- [ ] The download button stays dimmed and then re-enables, but the status line reads
-      *"We couldn't verify your purchase. Please refresh the page or contact support."*
-- [ ] Clicking the button shows the same message; **no PDF downloads**
+- [ ] The headline reads **"Nothing to download yet."** — *not* "You're in."
+- [ ] The words "Your payment was successful" appear **nowhere** on the page
+- [ ] The download button is gone; a **"Get the eBook — ₹249"** button is shown instead
+- [ ] That button goes to `/api/checkout` and starts a real payment
+- [ ] Nothing flashes a success message first — the wording stays hidden until the
+      server answers
 - [ ] DevTools → Network → `/api/download` returns **401**
 - [ ] The response body contains no URL, no payment id, no internal detail
 - [ ] Vercel logs: `download.denied`, `reason: no_session`
