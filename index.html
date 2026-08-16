@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>The Invisible Internet — What Really Happens When You Click a Link?</title>
+<meta name="description" content="Discover what really happens behind every click. A 15-chapter journey through DNS, packets, routers, HTTPS, servers and browsers — written for curious people, not just engineers.">
+<meta property="og:title" content="The Invisible Internet — What Really Happens When You Click a Link?">
+<meta property="og:description" content="One click. Hundreds of invisible steps. A beginner-friendly journey through how the internet actually works.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Sora:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  body{margin:0;}
+  a{color:oklch(0.72 0.17 250);}
+  a:hover{color:oklch(0.72 0.16 315);}
+  details > summary::-webkit-details-marker{display:none;}
+  @keyframes travelDot{0%{top:0%;opacity:0;}8%{opacity:1;}92%{opacity:1;}100%{top:100%;opacity:0;}}
+  @keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+  @keyframes pulseGlow{0%,100%{opacity:0.5;}50%{opacity:1;}}
+  @media (max-width:760px){
+    #mobile-sticky-cta{display:flex !important;}
+    #hero-grid{grid-template-columns:1fr !important;}
+    #hero-visual{order:-1;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;}
+  }
+</style>
+</helmet>
+
+<div style="--bg:oklch(0.16 0.028 255);--bg2:oklch(0.205 0.032 255);--card:oklch(0.195 0.03 255);--line:oklch(1 0 0 / 0.09);--fg:oklch(0.96 0.012 255);--fg2:oklch(0.74 0.02 255);--fg3:oklch(0.52 0.02 255);--blue:oklch(0.72 0.17 250);--violet:oklch(0.72 0.16 315);font-family:'Sora',sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;overflow-x:hidden;padding-bottom:88px;">
+
+  <!-- NAV -->
+  <nav style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px clamp(20px,5vw,64px);backdrop-filter:blur(14px);background:oklch(0.16 0.028 255 / 0.78);border-bottom:1px solid var(--line);flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.04em;">
+      <span style="width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--violet));box-shadow:0 0 12px 2px oklch(0.72 0.17 250 / 0.6);"></span>
+      THE INVISIBLE INTERNET
+    </div>
+    <div style="display:flex;align-items:center;gap:clamp(16px,3vw,32px);">
+      <a href="#whats-inside" style="text-decoration:none;color:var(--fg2);font-size:14px;">What's Inside</a>
+      <a href="#for-you" style="text-decoration:none;color:var(--fg2);font-size:14px;">Who It's For</a>
+      <a href="#faq" style="text-decoration:none;color:var(--fg2);font-size:14px;">FAQ</a>
+      <a href="{{ paymentUrl }}" style="display:inline-flex;align-items:center;padding:10px 22px;background:linear-gradient(135deg,var(--blue),var(--violet));color:oklch(0.14 0.02 255);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;border-radius:100px;text-decoration:none;white-space:nowrap;" style-hover="filter:brightness(1.08);">Get the eBook</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section style="padding:clamp(56px,9vw,110px) clamp(20px,6vw,64px) clamp(40px,6vw,80px);max-width:1280px;margin:0 auto;">
+    <div id="hero-grid" style="display:grid;grid-template-columns:1.15fr 0.85fr;gap:clamp(32px,5vw,64px);align-items:center;">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border:1px solid var(--line);border-radius:100px;font-size:13px;color:var(--fg2);letter-spacing:0.04em;margin-bottom:28px;">78 PAGES · 15 CHAPTERS · ONE JOURNEY</div>
+        <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(38px,5.2vw,64px);line-height:1.05;letter-spacing:-0.01em;margin:0 0 24px;">What really happens when you click a link?</h1>
+        <p style="font-size:clamp(17px,1.6vw,20px);line-height:1.6;color:var(--fg2);max-width:52ch;margin:0 0 8px;">You click. A webpage appears. And you probably never think about what happened in between.</p>
+        <p style="font-size:clamp(17px,1.6vw,20px);line-height:1.6;color:var(--fg2);max-width:52ch;margin:0 0 32px;"><strong style="color:var(--fg);">The Invisible Internet</strong> follows one ordinary click, one link at a time, through everything that happens before a page appears on your screen.</p>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.08em;color:var(--blue);margin-bottom:32px;">ONE CLICK. HUNDREDS OF INVISIBLE STEPS.</div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <a href="{{ paymentUrl }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 17px 34px; background: linear-gradient(135deg,var(--blue),var(--violet)); color: oklch(0.12 0.02 255); font-family: 'Space Grotesk',sans-serif; font-weight: 600; font-size: 16px; border-radius: 100px; text-decoration: none; box-shadow: 0 10px 34px oklch(0.72 0.17 250 / 0.35)" style-hover="transform:translateY(-2px);box-shadow:0 14px 42px oklch(0.72 0.17 250 / 0.5);">Get the eBook — ₹249</a>
+          <a href="#whats-inside" style="display:inline-flex;align-items:center;padding:17px 30px;border:1px solid var(--line);color:var(--fg);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;border-radius:100px;text-decoration:none;" style-hover="border-color:var(--blue);">See what's inside</a>
+        </div>
+      </div>
+      <div id="hero-visual" style="position:relative;display:flex;justify-content:center;align-items:center;min-height:420px;animation:floatY 7s ease-in-out infinite;">
+        <div style="position:absolute;width:80%;max-width:380px;aspect-ratio:1/1;border-radius:50%;background:radial-gradient(circle,oklch(0.72 0.17 250 / 0.35),oklch(0.72 0.16 315 / 0.2) 55%,transparent 75%);filter:blur(10px);"></div>
+        <div style="position:relative;perspective:1200px;width:100%;max-width:360px;">
+          <image-slot id="hero-book-cover" src="./assets/hero-book-cover.webp" shape="rect" fit="contain" placeholder="Drop: 3D book cover render (transparent background)" style="width:100%;aspect-ratio:4/5;background:transparent;transition:transform 0.4s ease;transform-style:preserve-3d;" style-hover="transform:rotateY(10deg) rotateX(6deg) scale(1.06);"></image-slot>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURIOSITY / REVEAL -->
+  <section style="padding:clamp(48px,7vw,90px) clamp(20px,6vw,64px);max-width:1100px;margin:0 auto;text-align:center;">
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,42px);line-height:1.2;margin:0 0 16px;">Have you ever wondered what happens between pressing Enter and seeing a webpage?</h2>
+    <p style="color:var(--fg2);font-size:17px;line-height:1.7;max-width:62ch;margin:0 auto 44px;">You've done this ten thousand times. It feels like flipping a light switch. It is actually a journey of thousands of kilometres, several handshakes between strangers' machines, and a small factory of computers deciding what to send back — all inside the time it takes to blink.</p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;">
+      <sc-for list="{{ timelineItems }}" as="item" hint-placeholder-count="21">
+        <sc-if value="{{ item.isStep }}" hint-placeholder-val="{{ true }}">
+          <div style="padding:11px 18px;background:var(--card);border:1px solid var(--line);border-radius:100px;font-size:14px;font-weight:500;color:var(--fg);white-space:nowrap;">{{ item.label }}</div>
+        </sc-if>
+        <sc-if value="{{ item.isArrow }}" hint-placeholder-val="{{ false }}">
+          <span style="color:var(--fg3);font-size:16px;">→</span>
+        </sc-if>
+      </sc-for>
+    </div>
+    <p style="font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--fg);font-size:18px;margin:44px 0 0;">Fifteen chapters. One unbroken chain. Still inside the blink of an eye.</p>
+  </section>
+
+  <!-- VALUE PROP -->
+  <section style="padding:clamp(48px,7vw,90px) clamp(20px,6vw,64px);background:var(--bg2);">
+    <div style="max-width:900px;margin:0 auto;text-align:center;">
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,3.2vw,38px);line-height:1.25;margin:0 0 20px;">Understand the hidden machinery behind the internet — without needing to become an engineer.</h2>
+      <p style="color:var(--fg2);font-size:17px;line-height:1.75;max-width:66ch;margin:0 auto;">Once you know what a slow DNS lookup feels like, or what a certificate warning actually means, the internet stops being a black box that sometimes seems to misbehave for no reason. It becomes a system with parts — and parts can be understood.</p>
+    </div>
+  </section>
+
+  <!-- FOR NON-TECHNICAL PEOPLE -->
+  <section id="for-you" style="padding:clamp(56px,8vw,100px) clamp(20px,6vw,64px);max-width:1200px;margin:0 auto;">
+    <div style="text-align:center;max-width:760px;margin:0 auto 56px;">
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,44px);line-height:1.2;margin:0 0 18px;">You don't need to be a programmer to understand the internet.</h2>
+      <p style="color:var(--fg2);font-size:17px;line-height:1.7;margin:0;">The book explains every concept the same way, on purpose: an everyday analogy first, a clear diagram second, technical precision only for readers who want to go further.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">
+      <sc-for list="{{ analogies }}" as="a" hint-placeholder-count="9">
+        <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;">
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.03em;color:var(--blue);margin-bottom:10px;">{{ a.concept }}</div>
+          <div style="color:var(--fg2);font-size:15px;line-height:1.6;">{{ a.analogy }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- WHAT'S INSIDE -->
+  <section id="whats-inside" style="padding:clamp(56px,8vw,100px) clamp(20px,6vw,64px);background:var(--bg2);">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div style="text-align:center;max-width:700px;margin:0 auto 56px;">
+        <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,44px);line-height:1.2;margin:0 0 18px;">Inside the book</h2>
+        <p style="color:var(--fg2);font-size:17px;line-height:1.7;margin:0;">One click, followed honestly, across fifteen chapters and six stages.</p>
+      </div>
+      <sc-for list="{{ parts }}" as="part" hint-placeholder-count="6">
+        <div style="margin-bottom:40px;">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+            <div style="height:1px;flex:0 0 24px;background:var(--line);"></div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.1em;color:var(--fg3);white-space:nowrap;">{{ part.name }}</div>
+            <div style="height:1px;flex:1;background:var(--line);"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
+            <sc-for list="{{ part.chapters }}" as="ch" hint-placeholder-count="2">
+              <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;" style-hover="border-color:oklch(0.72 0.17 250 / 0.4);">
+                <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;color:var(--blue);margin-bottom:10px;">{{ ch.num }}</div>
+                <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;margin-bottom:8px;">{{ ch.title }}</div>
+                <div style="color:var(--fg2);font-size:14px;line-height:1.6;">{{ ch.desc }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- WHY DIFFERENT -->
+  <section style="padding:clamp(56px,8vw,100px) clamp(20px,6vw,64px);max-width:900px;margin:0 auto;text-align:center;">
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,3.2vw,38px);line-height:1.3;margin:0 0 28px;">Not a networking textbook.<br>Not a programming course.<br>Not a wall of technical definitions.</h2>
+    <p style="color:var(--fg2);font-size:18px;line-height:1.7;margin:0 0 44px;">It's a journey. The book follows one single, realistic click — loading a webpage over HTTPS — from the keyboard all the way to the screen, and never lets go of it.</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;">
+      <div style="padding:20px 28px;background:var(--card);border:1px solid var(--line);border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:600;">ONE CLICK</div>
+      <span style="color:var(--fg3);font-size:22px;">+</span>
+      <div style="padding:20px 28px;background:var(--card);border:1px solid var(--line);border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:600;">15 CHAPTERS</div>
+      <span style="color:var(--fg3);font-size:22px;">+</span>
+      <div style="padding:20px 28px;background:linear-gradient(135deg,oklch(0.72 0.17 250 / 0.18),oklch(0.72 0.16 315 / 0.18));border:1px solid var(--line);border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:600;">ONE CONTINUOUS JOURNEY</div>
+    </div>
+  </section>
+
+  <!-- ABOUT THE AUTHOR -->
+  <section style="padding:clamp(40px,6vw,64px) clamp(20px,6vw,64px);max-width:700px;margin:0 auto;">
+    <div style="display:flex;align-items:center;gap:20px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;flex-wrap:wrap;">
+      <image-slot id="author-photo" src="./assets/author-photo.webp" shape="circle" placeholder="Author photo" style="width:64px;height:64px;flex-shrink:0;"></image-slot>
+      <div style="flex:1;min-width:220px;">
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;margin-bottom:4px;">Akash Kumar</div>
+        <div style="color:var(--fg2);font-size:14px;line-height:1.6;">Writes about technology in plain language, turning complex systems into stories anyone can follow. The Invisible Internet grew out of a question he kept getting asked: "but how does it actually work?"</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REAL WORLD -->
+  <section style="padding:clamp(56px,8vw,100px) clamp(20px,6vw,64px);background:var(--bg2);">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="text-align:center;max-width:700px;margin:0 auto 48px;">
+        <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,44px);line-height:1.2;margin:0 0 18px;">You already use all of this, every day.</h2>
+        <p style="color:var(--fg2);font-size:17px;line-height:1.7;margin:0;">This isn't abstract computer science. It's the machinery already running beneath your phone.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+        <sc-for list="{{ apps }}" as="app" hint-placeholder-count="8">
+          <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;">
+            <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;margin-bottom:12px;">{{ app.name }}</div>
+            <div style="font-size:13px;color:var(--fg3);margin-bottom:4px;">WHAT YOU NOTICE</div>
+            <div style="font-size:14px;color:var(--fg2);margin-bottom:14px;">{{ app.notice }}</div>
+            <div style="font-size:13px;color:var(--blue);margin-bottom:4px;">WHAT'S ACTUALLY HAPPENING</div>
+            <div style="font-size:14px;color:var(--fg2);line-height:1.55;">{{ app.reality }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIMENTS -->
+  <section style="padding:clamp(56px,8vw,100px) clamp(20px,6vw,64px);max-width:1200px;margin:0 auto;">
+    <div style="text-align:center;max-width:700px;margin:0 auto 48px;">
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,44px);line-height:1.2;margin:0 0 18px;">Don't just read about it. See it yourself.</h2>
+      <p style="color:var(--fg2);font-size:17px;line-height:1.7;margin:0;">Every chapter includes a beginner-friendly "Try It Yourself" — safe, quick experiments using tools already on your device.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">
+      <sc-for list="{{ experiments }}" as="exp" hint-placeholder-count="9">
+        <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;">
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;margin-bottom:8px;">{{ exp.title }}</div>
+          <div style="color:var(--fg2);font-size:14px;line-height:1.55;">{{ exp.action }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- TRANSFORMATION -->
+  <section style="padding:clamp(56px,8vw,100px) clamp(20px,6vw,64px);background:var(--bg2);">
+    <div style="max-width:900px;margin:0 auto;">
+      <div style="text-align:center;margin:0 auto 48px;">
+        <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,44px);line-height:1.2;margin:0 0 18px;">Before and after.</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <sc-for list="{{ transformations }}" as="t" hint-placeholder-count="5">
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 24px;">
+            <div style="color:var(--fg3);font-size:15px;font-style:italic;">{{ t.before }}</div>
+            <div style="color:var(--blue);font-size:18px;">→</div>
+            <div style="color:var(--fg);font-size:15px;">{{ t.after }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFIT GRID -->
+  <section style="padding:clamp(56px,8vw,100px) clamp(20px,6vw,64px);max-width:1200px;margin:0 auto;">
+    <div style="text-align:center;max-width:700px;margin:0 auto 48px;">
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,44px);line-height:1.2;margin:0 0 18px;">What you'll finally understand</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;">
+      <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="10">
+        <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;line-height:1.5;">{{ b.question }}</div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- PEEK INSIDE -->
+  <section style="padding:clamp(56px,8vw,100px) clamp(20px,6vw,64px);background:var(--bg2);">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="text-align:center;max-width:700px;margin:0 auto 48px;">
+        <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,44px);line-height:1.2;margin:0 0 18px;">Take a look inside</h2>
+        <p style="color:var(--fg2);font-size:17px;line-height:1.7;margin:0;">A preview of the actual pages — drop in real exports from the book below.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;">
+        <div>
+          <image-slot id="peek-cover" src="./assets/peek-cover.webp" shape="rounded" radius="14" placeholder="Drop: book cover" style="width:100%;aspect-ratio:3/4;"></image-slot>
+          <div style="text-align:center;font-size:13px;color:var(--fg3);margin-top:10px;">Cover</div>
+        </div>
+        <div>
+          <image-slot id="peek-toc" src="./assets/peek-toc.webp" shape="rounded" radius="14" placeholder="Drop: contents page" style="width:100%;aspect-ratio:3/4;"></image-slot>
+          <div style="text-align:center;font-size:13px;color:var(--fg3);margin-top:10px;">Table of Contents</div>
+        </div>
+        <div>
+          <image-slot id="peek-chapter" src="./assets/peek-chapter.webp" shape="rounded" radius="14" placeholder="Drop: chapter opener" style="width:100%;aspect-ratio:3/4;"></image-slot>
+          <div style="text-align:center;font-size:13px;color:var(--fg3);margin-top:10px;">Chapter Opener</div>
+        </div>
+        <div>
+          <image-slot id="peek-diagram" src="./assets/peek-diagram.webp" shape="rounded" radius="14" placeholder="Drop: DNS diagram page" style="width:100%;aspect-ratio:3/4;"></image-slot>
+          <div style="text-align:center;font-size:13px;color:var(--fg3);margin-top:10px;">DNS Resolution Diagram</div>
+        </div>
+        <div>
+          <image-slot id="peek-tls" src="./assets/peek-tls.webp" shape="rounded" radius="14" placeholder="Drop: TLS handshake page" style="width:100%;aspect-ratio:3/4;"></image-slot>
+          <div style="text-align:center;font-size:13px;color:var(--fg3);margin-top:10px;">The TLS Handshake</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF PLACEHOLDER -->
+  <section style="padding: clamp(56px,8vw,100px) clamp(20px,6vw,64px); max-width: 1200px; margin: 0 auto; display: none">
+    <div style="text-align:center;max-width:700px;margin:0 auto 48px;">
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,44px);line-height:1.2;margin:0 0 12px;">What readers say</h2>
+      <p style="color:var(--fg3);font-size:14px;">Reader testimonials will appear here once available.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">
+      <sc-for list="{{ testimonialSlots }}" as="slot" hint-placeholder-count="3">
+        <div style="background:var(--card);border:1px dashed var(--line);border-radius:16px;padding:24px;">
+          <div style="color:var(--fg3);font-size:14px;font-style:italic;margin-bottom:20px;">[Real reader testimonial here]</div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:var(--bg2);border:1px dashed var(--line);"></div>
+            <div style="font-size:13px;color:var(--fg3);">[Reader name]</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- PURCHASE -->
+  <section id="pricing" style="padding:clamp(56px,8vw,110px) clamp(20px,6vw,64px);background:var(--bg2);">
+    <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:stretch;">
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(28px,4vw,44px);">
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;margin-bottom:6px;">The Invisible Internet</div>
+        <div style="color:var(--fg2);font-size:15px;margin-bottom:24px;">What Really Happens When You Click a Link?</div>
+        <div style="display:flex;gap:24px;margin-bottom:28px;flex-wrap:wrap;">
+          <div><div style="font-size:12px;color:var(--fg3);">FORMAT</div><div style="font-weight:600;">Digital PDF</div></div>
+          <div><div style="font-size:12px;color:var(--fg3);">PAGES</div><div style="font-weight:600;">78</div></div>
+          <div><div style="font-size:12px;color:var(--fg3);">CHAPTERS</div><div style="font-weight:600;">15</div></div>
+        </div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:40px;margin-bottom:24px;">{{ price }}</div>
+        <a href="{{ paymentUrl }}" style="display:flex;justify-content:center;align-items:center;padding:18px;background:linear-gradient(135deg,var(--blue),var(--violet));color:oklch(0.12 0.02 255);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;border-radius:100px;text-decoration:none;" style-hover="filter:brightness(1.08);">Get This eBook</a>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:center;gap:16px;">
+        <sc-for list="{{ trustItems }}" as="item" hint-placeholder-count="6">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="color:var(--blue);font-size:16px;">✓</span>
+            <span style="color:var(--fg2);font-size:15px;">{{ item }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="padding:clamp(56px,8vw,100px) clamp(20px,6vw,64px);max-width:800px;margin:0 auto;">
+    <div style="text-align:center;margin:0 auto 44px;">
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,44px);line-height:1.2;margin:0;">Frequently asked questions</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="7">
+        <details style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;">
+          <summary style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;list-style:none;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;">
+            {{ f.q }}
+            <span style="color:var(--fg3);font-size:14px;margin-left:12px;">⌄</span>
+          </summary>
+          <div style="color:var(--fg2);font-size:15px;line-height:1.65;margin-top:14px;">{{ f.a }}</div>
+        </details>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="padding:clamp(64px,10vw,130px) clamp(20px,6vw,64px);text-align:center;position:relative;">
+    <div style="max-width:700px;margin:0 auto;">
+      <p style="color:var(--fg2);font-size:18px;margin:0 0 8px;">You use the internet every day.</p>
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(30px,4vw,48px);line-height:1.15;margin:0 0 28px;">Now see what's happening behind the screen.</h2>
+      <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.08em;color:var(--blue);margin-bottom:36px;">ONE CLICK. HUNDREDS OF INVISIBLE STEPS.</div>
+      <a href="{{ paymentUrl }}" style="display:inline-flex;align-items:center;padding:19px 44px;background:linear-gradient(135deg,var(--blue),var(--violet));color:oklch(0.12 0.02 255);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;border-radius:100px;text-decoration:none;box-shadow:0 12px 40px oklch(0.72 0.17 250 / 0.35);" style-hover="transform:translateY(-2px);">Get This eBook</a>
+      <p style="color:var(--fg3);font-size:13px;margin-top:20px;">Instant digital access · Delivered as a PDF · Read on any device</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="padding:32px clamp(20px,6vw,64px);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+    <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;">THE INVISIBLE INTERNET</div>
+    <div style="color:var(--fg3);font-size:13px;">© 2026. All rights reserved.</div>
+  </footer>
+
+  <!-- MOBILE STICKY CTA -->
+  <div id="mobile-sticky-cta" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:12px 16px;background:oklch(0.16 0.028 255 / 0.92);backdrop-filter:blur(14px);border-top:1px solid var(--line);">
+    <a href="{{ paymentUrl }}" style="display:flex;justify-content:center;align-items:center;padding:15px;background:linear-gradient(135deg,var(--blue),var(--violet));color:oklch(0.12 0.02 255);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;border-radius:100px;text-decoration:none;">Get the eBook — {{ price }}</a>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;paymentUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;/api/checkout&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;price&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;₹249&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    // Every "Get the eBook" button points at our own /api/checkout route, which
+    // 302-redirects to the Razorpay Payment Link held in the RAZORPAY_PAYMENT_LINK_URL
+    // environment variable. Keeping the link server-side means the checkout URL can be
+    // changed (test link -> live link, new price, new link) without touching this page.
+    const paymentUrl = this.props.paymentUrl ?? "/api/checkout";
+    // Must match the amount on the Razorpay Payment Link. This is display only —
+    // the real amount is whatever Razorpay charges, and the amount actually paid
+    // is recorded server-side from Razorpay's own data.
+    const price = this.props.price ?? "₹249";
+
+    const chainNodes = ["CLICK","DNS","PACKETS","ROUTERS","TLS","SERVER","BROWSER","PAGE"];
+
+    const timelineLabels = ["Type the URL","DNS Lookup","Packets Sent","Routed Hop by Hop","TCP Handshake","TLS Secured","HTTP Request","Server Processes","Response Sent Back","Browser Renders","Page Appears"];
+    const timelineItems = [];
+    timelineLabels.forEach((label, i) => {
+      timelineItems.push({ isStep: true, isArrow: false, label });
+      if (i < timelineLabels.length - 1) timelineItems.push({ isStep: false, isArrow: true, label: "" });
+    });
+
+    const parts = [
+      { name: "Part One — The Question", chapters: [
+        { num: "01", title: "The Click", desc: "What actually happens in the blink of time between pressing Enter and a page appearing." }
+      ]},
+      { name: "Part Two — Finding The Way", chapters: [
+        { num: "02", title: "The Address", desc: "Taking a URL apart — scheme, host, path — and why domain names exist at all." },
+        { num: "03", title: "The Internet's Phonebook", desc: "How DNS turns a name into a number, one resolver at a time." }
+      ]},
+      { name: "Part Three — The Journey", chapters: [
+        { num: "04", title: "The Message Breaks Apart", desc: "Why your request is torn into small packets before it ever leaves your device." },
+        { num: "05", title: "Who Knows Where To Go?", desc: "How routers pass packets hop by hop, with no single map of the whole route." },
+        { num: "06", title: "The Conversation Begins", desc: "The three-way handshake that opens a reliable connection between two strangers' machines." },
+        { num: "07", title: "The Secret Tunnel", desc: "How TLS encrypts, verifies and protects the conversation from anyone watching." },
+        { num: "08", title: "The Language of the Web", desc: "HTTP's requests, responses, and the three-digit codes behind every outcome." }
+      ]},
+      { name: "Part Four — The Other Side", chapters: [
+        { num: "09", title: "Behind the Curtain", desc: "Web servers, application servers and databases dividing the work between them." },
+        { num: "10", title: "Where Does the Internet Live?", desc: "Data centres, cloud computing, CDNs and load balancing, made concrete." },
+        { num: "11", title: "The Browser Creates the Page", desc: "HTML, CSS, JavaScript, the DOM, and how a browser paints pixels onto your screen." }
+      ]},
+      { name: "Part Five — Speed And Failure", chapters: [
+        { num: "12", title: "When Things Break", desc: "Reading DNS failures, timeouts, certificate warnings, 404s and 500s like clues." },
+        { num: "13", title: "Why Is It So Fast?", desc: "Latency versus bandwidth, and why round trips matter more than raw speed." }
+      ]},
+      { name: "Part Six — Coming Full Circle", chapters: [
+        { num: "14", title: "The Internet You Use Every Day", desc: "The same pattern, running quietly beneath Search, YouTube, WhatsApp and Maps." },
+        { num: "15", title: "Now Click Again", desc: "Walking through the entire chain once more — this time, on purpose." }
+      ]}
+    ];
+
+    const analogies = [
+      { concept: "DNS", analogy: "A phonebook — you look up a name and get back a number you can use to make contact." },
+      { concept: "Packets", analogy: "Moving house in many small, individually labelled boxes instead of one giant truck." },
+      { concept: "Routers", analogy: "A road trip guided by asking for directions at every town, one hop at a time." },
+      { concept: "TCP handshake", analogy: "The small ritual before a phone call — \u201chello?\u201d, \u201ccan you hear me?\u201d — before the real conversation starts." },
+      { concept: "TLS encryption", analogy: "A sealed, tamper-evident envelope, opened only after checking a passport you already trust." },
+      { concept: "HTTP", analogy: "Ordering at a counter — you state what you want, and get back a short, standard reply." },
+      { concept: "Servers", analogy: "A restaurant: a host at the door, a chef in the kitchen, and a pantry the chef quietly queries." },
+      { concept: "The cloud", analogy: "The electricity grid — plug in, pay for what you use, and let someone else run the generator." },
+      { concept: "HTML, CSS & JavaScript", analogy: "A house: the structural blueprint, the interior design pass, and the motion-sensor lights." }
+    ];
+
+    const apps = [
+      { name: "Google Search", notice: "Results appear instantly", reality: "DNS and HTTPS, then a request to a search index spread across data centres, ranking billions of pages in milliseconds." },
+      { name: "YouTube", notice: "Video starts at once, in the right quality", reality: "A CDN serves nearby cached video chunks; your bandwidth continuously determines the streamed quality." },
+      { name: "WhatsApp", notice: "Messages arrive within a second", reality: "Reliable, TCP-style delivery with end-to-end encryption similar in spirit to TLS." },
+      { name: "Instagram", notice: "An endless, personalised feed", reality: "Dynamic content built per request from a database, delivered through APIs, images served from a CDN." },
+      { name: "UPI Payments", notice: "Money moves in seconds", reality: "Encrypted HTTPS requests between banking APIs, coordinated through a central switch." },
+      { name: "Google Maps", notice: "Your location updates live", reality: "Small, periodic HTTPS requests carrying GPS coordinates, answered with cached map tiles." },
+      { name: "Video Calls", notice: "Real-time audio and video", reality: "A connection tuned for low latency over reliability, tolerating tiny losses rather than pausing to retransmit." },
+      { name: "AI Chat Apps", notice: "Responses appear word by word", reality: "One HTTPS request, streaming a model's response back over the same open connection as it's generated." }
+    ];
+
+    const experiments = [
+      { title: "Read a URL", action: "Look at any address bar and spot the scheme, host and path." },
+      { title: "Run nslookup or dig", action: "Look up a domain name and see the IP address behind it." },
+      { title: "Run tracert or traceroute", action: "Watch your packets hop from router to router in real time." },
+      { title: "Inspect a certificate", action: "Click the padlock and see who verified the site you're on." },
+      { title: "Open the Network tab", action: "Watch every request a page makes, with its method and status code." },
+      { title: "Spot a CDN", action: "Check a response header for a server name like \"cloudflare\" or a cache HIT." },
+      { title: "Open the Elements tab", action: "Watch the DOM update live as you interact with a page." },
+      { title: "Read a waterfall chart", action: "See which requests run in parallel, and which one is the bottleneck." },
+      { title: "Trigger a safe 404", action: "Add a made-up path to any address and read the response you get back." }
+    ];
+
+    const transformations = [
+      { before: "\u201cThe website is just slow.\u201d", after: "\u201cThis could be a DNS delay, a missing CDN cache, or a slow round trip.\u201d" },
+      { before: "\u201cIt says 404. No idea why.\u201d", after: "\u201c404 means the server was reached, but nothing exists at that exact path.\u201d" },
+      { before: "\u201cWhat does the padlock actually mean?\u201d", after: "\u201cTLS has encrypted, verified and protected this specific connection.\u201d" },
+      { before: "\u201cThe cloud is just... out there somewhere.\u201d", after: "\u201cThe cloud is physical — racks of real servers, inside a real data centre.\u201d" },
+      { before: "\u201cWhy does this page load instantly and that one doesn't?\u201d", after: "\u201cLatency, caching, CDNs and parallel requests decide that — not just \u2018internet speed.\u2019\u201d" }
+    ];
+
+    const benefits = [
+      "Why does a name need to become a number before anything can happen?",
+      "How does DNS find the right server in a fraction of a second?",
+      "Why does the internet break your data into packets?",
+      "How do packets find their way with no single map of the route?",
+      "What is actually being verified when a connection is \u201csecure\u201d?",
+      "What is a server, really — and why is it rarely just one machine?",
+      "Where does \u201cthe cloud\u201d actually exist?",
+      "How does a browser turn plain text into the page you see?",
+      "What does a 404 actually mean, and who made the mistake?",
+      "Why doesn't more bandwidth always mean a faster-feeling page?"
+    ].map(question => ({ question }));
+
+    const trustItems = [
+      "Instant digital access after payment",
+      "PDF format — read on phone, tablet or laptop",
+      "No physical shipping",
+      "Beginner friendly, no prior knowledge needed",
+      "A 15-chapter, single-journey structure",
+      "Written in plain language throughout"
+    ];
+
+    const faqs = [
+      { q: "Is this book only for programmers?", a: "No. It's written for anyone who uses the internet, regardless of technical background. The book uses analogies, diagrams and everyday examples rather than code." },
+      { q: "Do I need any networking knowledge to start?", a: "None. The book starts from a single click and introduces every concept — DNS, packets, routers, HTTPS — the first time it's needed, in plain language." },
+      { q: "Is this a programming book?", a: "No. It doesn't teach you to write code. It explains what happens across the internet and inside your browser when a webpage loads." },
+      { q: "How technical does it get?", a: "Technical enough to be accurate, and no further. Each chapter includes an optional \u201ca little more precisely\u201d note for readers who want sharper detail, but it's never required to follow along." },
+      { q: "What format do I receive?", a: "A digital PDF, 78 pages across 15 chapters, readable on a phone, tablet or laptop." },
+      { q: "Can I read it on my phone?", a: "Yes. It's a standard PDF with no special reader or app required." },
+      { q: "How is the ebook delivered after payment?", a: "After a successful payment, you're redirected to a confirmation page with your download link — no separate email step to wait for." }
+    ];
+
+    const testimonialSlots = [1, 2, 3];
+
+    return { paymentUrl, price, chainNodes, timelineItems, parts, analogies, apps, experiments, transformations, benefits, trustItems, faqs, testimonialSlots };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+# Secrets — never commit these
+.env
+.env.*
+!.env.example
+
+# THE PRODUCT ITSELF — must never reach GitHub or Vercel.
+# The PDF is sold; it lives in the private Supabase `ebook` bucket, nowhere else.
+# `uploads/` also holds the extracted manuscript text.
+uploads/
+*.pdf
+
+# Master images. The multi-megabyte PNGs are the source for `assets/*.webp`;
+# only the encoded WebP output ships. Rebuild with `npm run images`.
+local-source/
+
+# Dependencies and build output
+node_modules/
+.vercel/
+
+# Design-tool artefacts
+.thumbnail
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.log

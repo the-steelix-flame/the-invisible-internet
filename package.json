@@ -1,0 +1,22 @@
+{
+  "name": "the-invisible-internet",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sales page, payment verification and secure eBook delivery for The Invisible Internet.",
+  "type": "module",
+  "engines": {
+    "node": ">=18.18"
+  },
+  "scripts": {
+    "dev": "vercel dev",
+    "check": "node scripts/check.js",
+    "images": "node scripts/optimize-images.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.112.3"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.3",
+    "vercel": "^59.1.3"
+  }
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>You're In — The Invisible Internet</title>
+<meta name="description" content="Your payment was successful. Download The Invisible Internet now.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Sora:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  body{margin:0;}
+  a{color:oklch(0.72 0.17 250);}
+  a:hover{color:oklch(0.72 0.16 315);}
+  @keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+  @keyframes travelDot{0%{top:0%;opacity:0;}8%{opacity:1;}92%{opacity:1;}100%{top:100%;opacity:0;}}
+  @keyframes pop{0%{transform:scale(0.8);opacity:0;}100%{transform:scale(1);opacity:1;}}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;}
+  }
+</style>
+</helmet>
+
+<div style="--bg:oklch(0.16 0.028 255);--bg2:oklch(0.205 0.032 255);--card:oklch(0.195 0.03 255);--line:oklch(1 0 0 / 0.09);--fg:oklch(0.96 0.012 255);--fg2:oklch(0.74 0.02 255);--fg3:oklch(0.52 0.02 255);--blue:oklch(0.72 0.17 250);--violet:oklch(0.72 0.16 315);font-family:'Sora',sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(32px,6vw,64px) clamp(20px,6vw,64px);text-align:center;">
+
+  <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center;margin-bottom:28px;animation:pop 0.5s ease-out;box-shadow:0 0 40px 8px oklch(0.72 0.17 250 / 0.35);">
+    <span style="font-size:28px;color:oklch(0.12 0.02 255);">✓</span>
+  </div>
+
+  <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(36px,6vw,64px);line-height:1.05;margin:0 0 14px;">You're in.</h1>
+  <p style="font-size:clamp(17px,1.8vw,20px);color:var(--fg2);max-width:44ch;margin:0 0 8px;">Your journey into the Invisible Internet starts now.</p>
+  
+
+  <p style="font-size:15px;color:var(--fg3);max-width:44ch;margin:0 0 44px;">Your payment was successful. Your eBook is ready.</p><div style="width:100%;max-width:480px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(28px,5vw,40px);animation:floatY 7s ease-in-out infinite;">
+    <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;margin-bottom:4px;">The Invisible Internet</div>
+    <div style="color:var(--fg2);font-size:14px;margin-bottom:20px;">What Really Happens When You Click a Link?</div>
+    <div style="display:flex;justify-content:center;gap:24px;margin-bottom:28px;flex-wrap:wrap;">
+      <div><div style="font-size:11px;color:var(--fg3);">FORMAT</div><div style="font-weight:600;font-size:14px;">PDF</div></div>
+      <div><div style="font-size:11px;color:var(--fg3);">CHAPTERS</div><div style="font-weight:600;font-size:14px;">15</div></div>
+      <div><div style="font-size:11px;color:var(--fg3);">PAGES</div><div style="font-weight:600;font-size:14px;">78</div></div>
+    </div>
+    <a id="download-btn" href="#" style="display: flex; justify-content: center; align-items: center; gap: 8px; padding: 18px; background: linear-gradient(135deg,var(--blue),var(--violet)); color: oklch(0.12 0.02 255); font-family: 'Space Grotesk',sans-serif; font-weight: 600; font-size: 16px; border-radius: 100px; text-decoration: none; box-shadow: 0 10px 34px oklch(0.72 0.17 250 / 0.35); opacity: 0.55; pointer-events: none; transition: opacity 0.3s ease" style-hover="transform:translateY(-2px);">Download the eBook</a>
+    <div id="download-status" style="margin-top:14px;font-size:13px;line-height:1.5;color:var(--fg3);min-height:20px;">Preparing your secure download…</div>
+  </div>
+
+  <p style="color:var(--fg3);font-size:13px;margin-top:28px;max-width:44ch;">Save the PDF somewhere you'll find it — your phone, laptop, or cloud drive. Then find a quiet ten minutes and start with Chapter One.</p>
+
+  <div style="margin-top:56px;display:flex;align-items:center;gap:10px;opacity:0.6;">
+    <span style="width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--violet));"></span>
+    <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.08em;color:var(--fg3);">ONE CLICK. HUNDREDS OF INVISIBLE STEPS.</span>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
+class Component extends DCLogic {
+  renderVals() {
+    // No download URL lives in this page any more. The download button is wired up by
+    // thank-you.js, which asks /api/download for a short-lived Supabase signed URL only
+    // after the server has verified this browser holds a real, paid purchase session.
+    return {};
+  }
+}
+
+</script>
+<script src="./thank-you.js" defer></script>
+</body>
+</html>

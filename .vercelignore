@@ -1,0 +1,22 @@
+# Second line of defence for `vercel deploy` from this machine, which does NOT
+# read .gitignore. Anything listed here is never uploaded to Vercel, so it can
+# never be served from the CDN.
+
+# The product. Selling it requires that it is not sitting at a public URL.
+uploads/
+*.pdf
+
+# Master images — source PNGs for `assets/*.webp`. Only the WebP output ships.
+local-source/
+
+.env
+.env.*
+!.env.example
+
+node_modules/
+.vercel/
+.thumbnail
+supabase/
+scripts/
+README.md
+TESTING.md
